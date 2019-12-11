@@ -20,7 +20,7 @@ import neu.lab.autoexec.util.FileSyn;
 import neu.lab.autoexec.util.PomReader;
 
 public abstract class AutoSensor {
-    private static String wsDir = "D:\\ws_testcase\\image\\";
+    private static String Dir = "/home/wwww/sensor/";
     public FileSyn donePjct;// project has done;
     public FileSyn mvnExpPjt;// project that throws exception when executes maven command
     public FileSyn notJarPjct;// record project that hasn't conflict
@@ -30,11 +30,15 @@ public abstract class AutoSensor {
     private String projectDir;
 
     public String getBatPath() {
-        return wsDir + "decca.bat";
+        return Dir + "decca.bat";
+    }
+
+    public String getShellPath() {
+        return Dir + "sensor.sh";
     }
 
     protected String getStateDir() {
-        return wsDir + "state_decca\\";
+        return Dir + "state_decca/";
     }
 
     public abstract String getCommand();
@@ -109,7 +113,7 @@ public abstract class AutoSensor {
         System.out.println("handle pom for:" + pomPath);
 
         StringBuilder outResult = new StringBuilder("exeResult for ");
-        neu.lab.autoexec.util.FileUtil.delFolder(pomPath + "\\evosuite-report");
+        neu.lab.autoexec.util.FileUtil.delFolder(pomPath + "/evosuite-report");
 
         String projectName = path2name(pomPath);
 
@@ -117,20 +121,20 @@ public abstract class AutoSensor {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("start time：" + sdf.format(new Date()));
         try {
-            PomReader reader = new PomReader(pomPath + "\\pom.xml");
+            PomReader reader = new PomReader(pomPath + "/pom.xml");
             outResult.append(reader.getCoordinate() + " ");
             //skip too long project
-            if (pomPath.startsWith("D:\\ws\\gitHub_old\\hadoop-release-3.0.0-alpha1-RC0")
-                    || pomPath.startsWith("D:\\ws\\gitHub_old\\hadoop-common-release-2.5.0-rc0")
-                    || pomPath.startsWith("D:\\ws\\gitHub_old\\flink-release-1.4.0-rc2\\")) {
-                System.out.println("skip long time project:" + pomPath);
-                outResult.append("skip-long");
-                return outResult.toString();
-            }
+//            if (pomPath.startsWith("D:\\ws\\gitHub_old\\hadoop-release-3.0.0-alpha1-RC0")
+//                    || pomPath.startsWith("D:\\ws\\gitHub_old\\hadoop-common-release-2.5.0-rc0")
+//                    || pomPath.startsWith("D:\\ws\\gitHub_old\\flink-release-1.4.0-rc2\\")) {
+//                System.out.println("skip long time project:" + pomPath);
+//                outResult.append("skip-long");
+//                return outResult.toString();
+//            }
             //skip test
-            boolean isTest = pomPath.contains("\\example") || pomPath.contains("\\tests");
+            boolean isTest = pomPath.contains("/example") || pomPath.contains("/tests");
             //TODO execute test?
-            if (!isTest) {
+            if (isTest) {
                 System.out.println("skip example project:" + pomPath);
                 outResult.append("skip-example");
                 return outResult.toString();
@@ -153,6 +157,7 @@ public abstract class AutoSensor {
             }
 
         } catch (DocumentException e) {// can't read pom
+            System.out.println(e.getMessage());
             outResult.append(pomPath);
             outResult.append("pom-error");
         }
@@ -165,8 +170,11 @@ public abstract class AutoSensor {
     private void mvnOnePom(String pomPath) throws Exception {
         // try {
         System.out.println("exec mvn for:" + pomPath);
-        writeBat(pomPath);
-        String line = "cmd.exe /C " + getBatPath();
+//        writeBat(pomPath);
+        writeShell(pomPath);
+//        String line = "cmd.exe /C " + getBatPath();
+        String line = "sh " + getShellPath();
+        System.out.println(line);
         CommandLine cmdLine = CommandLine.parse(line);
         DefaultExecutor executor = new DefaultExecutor();
         executor.execute(cmdLine);
@@ -208,9 +216,9 @@ public abstract class AutoSensor {
     private List<String> findPomPaths(File father) {
         File[] children = father.listFiles();
         List<String> pomPaths = new ArrayList<String>();
-        if (!father.getAbsolutePath().contains("\\target\\")
-                && !father.getAbsolutePath().contains("\\src\\main\\resources\\")
-                && !father.getAbsolutePath().contains("\\src\\test\\")) {
+        if (!father.getAbsolutePath().contains("/target/")
+                && !father.getAbsolutePath().contains("/src/main/resources/")
+                && !father.getAbsolutePath().contains("/src/test/")) {
             for (File child : children) {
                 if (child.getName().equals("pom.xml")) {
                     pomPaths.add(father.getAbsolutePath());
@@ -232,4 +240,11 @@ public abstract class AutoSensor {
         printer.close();
     }
 
+    private void writeShell(String pomPath) throws IOException {
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(getShellPath())));
+        printer.println("#!/bin/bash");
+        printer.println("cd " + pomPath);
+        printer.println(getCommand());
+        printer.close();
+    }
 }

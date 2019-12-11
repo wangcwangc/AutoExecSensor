@@ -8,7 +8,7 @@ public class AutoPrintSize extends AutoSensor{
 
 	@Override
 	public String getCommand() {
-		return "mvn -DresultPath=/wwww/sensor/out/ -Dmaven.test.skip=true neu.lab:X:1.0:printSize -e";
+		return "mvn -DresultPath=/home/wwww/sensor/out/ -Dmaven.test.skip=true neu.lab:X:1.0:printSize -e";
 	}
 
 }
