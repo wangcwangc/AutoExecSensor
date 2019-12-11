@@ -17,6 +17,7 @@ public class AutoExecEntrance {
     public static void main(String[] args) throws IOException {
         //TODO which goal
 
+        new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(true);
 //				new neu.lab.autoexe.decca.AutoDebug(projectDir).autoExe(getPomPathBySize("D:\\ws_testcase\\projectSize_develop.txt"),
 //						true);
 //        new neu.lab.autoexec.decca.AutoDebug2(projectDir).autoExe(getPomPaths(),
