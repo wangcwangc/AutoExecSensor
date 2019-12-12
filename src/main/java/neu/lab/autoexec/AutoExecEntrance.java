@@ -16,8 +16,13 @@ public class AutoExecEntrance {
     // D:\ws\gitHub_old\
     public static void main(String[] args) throws IOException {
         //TODO which goal
-//        new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(true);
-        new neu.lab.autoexec.sensor.AutoPrintSize(projectDir).autoExe(true);
+        if (args.length == 0) {
+            new neu.lab.autoexec.sensor.AutoPrintSize(projectDir).autoExe(true);
+        } else {
+            if (args[0].equals("detect")) {
+                new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(getPomPathBySize("/home/wwww/sensor/out/projectSize.txt"), true);
+            }
+        }
     }
 
     private static List<String> getPomPathBySize(String sizeFile) {

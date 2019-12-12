@@ -1,14 +1,15 @@
 package neu.lab.autoexec.sensor;
 
-public class AutoPrintSize extends AutoSensor{
+public class AutoPrintSize extends AutoSensor {
 
-	public AutoPrintSize(String projectDir) {
-		super(projectDir);
-	}
+    public AutoPrintSize(String projectDir) {
+        super(projectDir);
+    }
 
-	@Override
-	public String getCommand() {
-		return "mvn -DresultPath=/home/wwww/sensor/out/ -Dmaven.test.skip=true neu.lab:X:1.0:printSize -e";
-	}
+    @Override
+    public String getCommand() {
+        return "mvn package -Dmaven.test.skip=true\n" +
+                "mvn -DresultPath=/home/wwww/sensor/out/ -Dmaven.test.skip=true neu.lab:X:1.0:printSize -e";
+    }
 
 }
