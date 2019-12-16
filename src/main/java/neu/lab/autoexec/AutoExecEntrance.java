@@ -23,6 +23,7 @@ public class AutoExecEntrance {
                 new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(getPomPathBySize("/home/wwww/sensor/out/projectSize.txt"), true);
             }
         }
+
     }
 
     private static List<String> getPomPathBySize(String sizeFile) {

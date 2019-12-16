@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -34,7 +37,7 @@ public abstract class AutoSensor {
     }
 
     public String getShellPath() {
-        return Dir + "sensor.sh";
+        return Dir + "multithreadsensor/" + Thread.currentThread().getName() + "sensor.sh";
     }
 
     protected String getStateDir() {
@@ -79,9 +82,34 @@ public abstract class AutoSensor {
         }
         System.out.println("left/all " + leftProjects.size() + "/" + allTask);
 
+        //多线程
+        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
+
         if (exeByOrder) {
-            for (String pomPath : leftProjects) {
-                handleProject(pomPath);
+            for (final String pomPath : leftProjects) {
+                executor.execute(new Thread(new Runnable() {
+                    /**
+                     * When an object implementing interface <code>Runnable</code> is used
+                     * to create a thread, starting the thread causes the object's
+                     * <code>run</code> method to be called in that separately executing
+                     * thread.
+                     * <p>
+                     * The general contract of the method <code>run</code> is that it may
+                     * take any action whatsoever.
+                     *
+                     * @see Thread#run()
+                     */
+                    public void run() {
+                        System.out.println(Thread.currentThread().getName() + ":" + pomPath);
+                        handleProject(pomPath);
+                    }
+                }));
+            }
+            executor.shutdown();
+            try {
+                executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         } else {
             while (leftProjects.size() != 0) {
@@ -103,9 +131,11 @@ public abstract class AutoSensor {
 
     private void handleProject(String pomPath) {
         String handleResult = getProjectResult(pomPath);
-        System.out.println(handleResult);
-        donePjct.add(path2name(pomPath));
-        completeSize++;
+        synchronized (this) {
+            System.out.println(handleResult);
+            donePjct.add(path2name(pomPath));
+            completeSize++;
+        }
     }
 
     protected String getProjectResult(String pomPath) {
