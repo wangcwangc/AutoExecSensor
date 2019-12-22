@@ -1,12 +1,6 @@
 package neu.lab.autoexec.sensor;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.dom4j.DocumentException;
 
 import neu.lab.autoexec.util.FileSyn;
@@ -80,10 +75,8 @@ public abstract class AutoSensor {
                 completeSize++;
             }
         }
-        System.out.println("left/all " + leftProjects.size() + "/" + allTask);
-
         //多线程
-        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
+        ExecutorService executor = Executors.newFixedThreadPool(10);
 
         if (exeByOrder) {
             for (final String pomPath : leftProjects) {
@@ -120,7 +113,6 @@ public abstract class AutoSensor {
 
             }
         }
-
         writeState();
     }
 
@@ -276,5 +268,30 @@ public abstract class AutoSensor {
         printer.println("cd " + pomPath);
         printer.println(getCommand());
         printer.close();
+    }
+
+    public static void main(String[] args) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+//        exec.setStreamHandler(streamHandler);
+//        exec.execute(commandline);
+//        return(outputStream.toString());
+        CommandLine cmdLine = CommandLine.parse("mvn test");
+        DefaultExecutor executor = new DefaultExecutor();
+        try {
+            executor.setStreamHandler(streamHandler);
+            executor.execute(cmdLine);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        System.out.println(outputStream.toString());
+        boolean bulidSuccess = false;
+        for (String line : outputStream.toString().split("\\n")) {
+            if (line.contains("Tests run:")) {
+                System.out.println(line);
+                bulidSuccess = true;
+            }
+        }
     }
 }
