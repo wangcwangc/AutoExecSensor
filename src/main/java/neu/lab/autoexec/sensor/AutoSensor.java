@@ -76,7 +76,7 @@ public abstract class AutoSensor {
             }
         }
         //多线程
-        ExecutorService executor = Executors.newFixedThreadPool(10);
+        ExecutorService executor = Executors.newFixedThreadPool(20);
 
         if (exeByOrder) {
             for (final String pomPath : leftProjects) {
@@ -266,32 +266,7 @@ public abstract class AutoSensor {
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(getShellPath())));
         printer.println("#!/bin/bash");
         printer.println("cd " + pomPath);
-        printer.println(getCommand());
+        printer.println(getCommand() + ">>" + Dir + "multithreadsensor/log/" + Thread.currentThread().getName() + "log.txt");
         printer.close();
-    }
-
-    public static void main(String[] args) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
-//        exec.setStreamHandler(streamHandler);
-//        exec.execute(commandline);
-//        return(outputStream.toString());
-        CommandLine cmdLine = CommandLine.parse("mvn test");
-        DefaultExecutor executor = new DefaultExecutor();
-        try {
-            executor.setStreamHandler(streamHandler);
-            executor.execute(cmdLine);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//        System.out.println(outputStream.toString());
-        boolean bulidSuccess = false;
-        for (String line : outputStream.toString().split("\\n")) {
-            if (line.contains("Tests run:")) {
-                System.out.println(line);
-                bulidSuccess = true;
-            }
-        }
     }
 }

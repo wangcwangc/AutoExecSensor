@@ -20,6 +20,8 @@ public class AutoExecEntrance {
             new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(getPomPathBySize("/home/wwww/sensor/out/projectSize.txt"), true);
         } else if (args[0].equals("change")) {
             new neu.lab.autoexec.sensor.AutoChangeDependencyVersion(projectDir).autoExe(getPomPathByTestSize("/home/wwww/sensor/dataset/sortTestFileResult.txt"), true);
+        }else if(args[0].equals("count")){
+            new neu.lab.autoexec.sensor.AutoCount(projectDir).autoExe(getPomPathBySize("/home/wwww/sensor/dataset/sortProject.txt"), true);
         }
     }
 
@@ -62,7 +64,7 @@ public class AutoExecEntrance {
                 if (!line.equals("")) {
                     String[] pom_jar_test_size = line.split(" ");
                     Integer size = Integer.valueOf(pom_jar_test_size[1]);
-                    if (size > 10) {
+                    if (size > 2) {
                         List<String> poms = size2poms.get(size);
                         if (poms == null) {
                             poms = new ArrayList<String>();
