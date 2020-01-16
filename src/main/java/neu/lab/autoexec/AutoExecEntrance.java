@@ -64,7 +64,7 @@ public class AutoExecEntrance {
                 if (!line.equals("")) {
                     String[] pom_jar_test_size = line.split(" ");
                     Integer size = Integer.valueOf(pom_jar_test_size[1]);
-                    if (size > 2) {
+                    if (size > 10) {
                         List<String> poms = size2poms.get(size);
                         if (poms == null) {
                             poms = new ArrayList<String>();

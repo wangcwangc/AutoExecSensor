@@ -3,7 +3,7 @@ package neu.lab.autoexec.sensor;
 public class AutoSemanticsConflict extends AutoSensor {
 
     public AutoSemanticsConflict(String projectDir) {
-        super(projectDir);
+        super(projectDir, "conflict");
     }
 
     public String getCommand() {

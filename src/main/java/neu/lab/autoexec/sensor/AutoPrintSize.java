@@ -3,7 +3,7 @@ package neu.lab.autoexec.sensor;
 public class AutoPrintSize extends AutoSensor {
 
     public AutoPrintSize(String projectDir) {
-        super(projectDir);
+        super(projectDir,"size");
     }
 
     @Override

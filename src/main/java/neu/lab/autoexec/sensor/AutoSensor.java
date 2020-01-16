@@ -18,6 +18,7 @@ import neu.lab.autoexec.util.FileSyn;
 import neu.lab.autoexec.util.PomReader;
 
 public abstract class AutoSensor {
+    protected String name;
     private static String Dir = "/home/wwww/sensor/";
     public FileSyn donePjct;// project has done;
     public FileSyn mvnExpPjt;// project that throws exception when executes maven command
@@ -32,7 +33,7 @@ public abstract class AutoSensor {
     }
 
     public String getShellPath() {
-        return Dir + "multithreadsensor/" + Thread.currentThread().getName() + "sensor.sh";
+        return Dir + "multithreadsensor/" + Thread.currentThread().getName() + name + "Sensor.sh";
     }
 
     protected String getStateDir() {
@@ -41,7 +42,8 @@ public abstract class AutoSensor {
 
     public abstract String getCommand();
 
-    public AutoSensor(String projectDir) {
+    public AutoSensor(String projectDir, String name) {
+        this.name = name;
         this.projectDir = projectDir;
     }
 
@@ -76,7 +78,7 @@ public abstract class AutoSensor {
             }
         }
         //多线程
-        ExecutorService executor = Executors.newFixedThreadPool(20);
+        ExecutorService executor = Executors.newFixedThreadPool(4);
 
         if (exeByOrder) {
             for (final String pomPath : leftProjects) {
@@ -253,20 +255,20 @@ public abstract class AutoSensor {
         return pomPaths;
     }
 
-    protected void writeBat(String pomPath) throws IOException {
-        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(getBatPath())));
-        printer.println("cd " + pomPath);
-        // printer.println("mvn -Dmaven.test.skip=true package
-        // neu.lab:conflict:1.0:detect -e");
-        printer.println(getCommand());
-        printer.close();
-    }
+//    protected void writeBat(String pomPath) throws IOException {
+//        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(getBatPath())));
+//        printer.println("cd " + pomPath);
+//        // printer.println("mvn -Dmaven.test.skip=true package
+//        // neu.lab:conflict:1.0:detect -e");
+//        printer.println(getCommand());
+//        printer.close();
+//    }
 
     private void writeShell(String pomPath) throws IOException {
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(getShellPath())));
         printer.println("#!/bin/bash");
         printer.println("cd " + pomPath);
-        printer.println(getCommand() + ">>" + Dir + "multithreadsensor/log/" + Thread.currentThread().getName() + "log.txt");
+        printer.println(getCommand() + ">>" + Dir + "multithreadsensor/log/" + Thread.currentThread().getName() + name + "Log.txt");
         printer.close();
     }
 }
