@@ -19,7 +19,7 @@ import neu.lab.autoexec.util.PomReader;
 
 public abstract class AutoSensor {
     protected String name;
-    private static String Dir = "/home/wwww/sensor/";
+    private static String Dir = "/root/sensor/";
     public FileSyn donePjct;// project has done;
     public FileSyn mvnExpPjt;// project that throws exception when executes maven command
     public FileSyn notJarPjct;// record project that hasn't conflict

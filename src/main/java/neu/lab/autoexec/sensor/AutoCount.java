@@ -8,6 +8,6 @@ public class AutoCount extends AutoSensor {
 
 
     public String getCommand() {
-        return "mvn -DresultPath=/home/wwww/sensor/out/ -Dmaven.test.skip=true neu.lab:X:1.0:countProject -e";
+        return "mvn -DresultPath=/root/sensor/out/ -Dmaven.test.skip=true neu.lab:X:1.0:countProject -e";
     }
 }

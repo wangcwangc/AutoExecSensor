@@ -190,8 +190,8 @@ public class ZipUtil {
 //            e.printStackTrace();
 //        }
 
-        String zipFilePath = "/home/wwww/sensor/githubProject";
-        String unzipFilePath = "/home/wwww/sensor/unzip";
+        String zipFilePath = "/root/sensor/githubProject";
+        String unzipFilePath = "/root/sensor/unzip";
         try {
 
             for (File file : new File(zipFilePath).listFiles()) {

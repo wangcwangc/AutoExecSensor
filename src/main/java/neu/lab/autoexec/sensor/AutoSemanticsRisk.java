@@ -6,7 +6,7 @@ public class AutoSemanticsRisk extends AutoSensor {
     }
 
     public String getCommand() {
-        return "mvn package\n" +
-                "mvn -f=pom.xml -DresultPath=/home/wwww/sensor/out/ -Dmaven.test.skip=true neu.lab:X:1.0:semanticsRisk -e";
+        return "mvn package -Dmaven.test.skip=true\n" +
+                "mvn -f=pom.xml -DresultPath=/root/sensor/out/sensor/ -Dmaven.test.skip=true neu.lab:X:1.0:semanticsRisk -e";
     }
 }

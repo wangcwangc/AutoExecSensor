@@ -14,6 +14,6 @@ public class AutoChangeDependencyVersion extends AutoSensor {
 
     public String getCommand() {
         return "mvn clean\n" +
-                "mvn -f=pom.xml -DlogFilePath=/home/wwww/sensor/out/autoChangeDependencyVersionLog/ -Dmaven.test.skip=true neu.lab:AutoChangeDependencyVersion:1.0:changeDependency -e";
+                "mvn -f=pom.xml -DlogFilePath=/root/sensor/out/autoChangeDependencyVersionLog/ -Dmaven.test.skip=true neu.lab:AutoChangeDependencyVersion:1.0:changeDependency -e";
     }
 }
