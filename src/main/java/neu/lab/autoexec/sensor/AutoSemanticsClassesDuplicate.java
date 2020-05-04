@@ -8,7 +8,7 @@ public class AutoSemanticsClassesDuplicate extends AutoSensor {
 
     @Override
     public String getCommand() {
-        return "mvn package -Dmaven.test.skip=true\n" +
+        return //"mvn package -Dmaven.test.skip=true\n" +
                 "mvn -f=pom.xml -DresultPath=/root/sensor/out/classes/ -DignoreTestScope=true -Dmaven.test.skip=true neu.lab:X:1.0:classDupRisk -e";
     }
 }

@@ -26,6 +26,8 @@ public class AutoExecEntrance {
             new neu.lab.autoexec.sensor.AutoSemanticsRisk(projectDir).autoExe(getPomPathByTreeSize("/root/sensor/out/projectSize.txt"), true);
         }else if(args[0].equals("classes")){
             new neu.lab.autoexec.sensor.AutoSemanticsClassesDuplicate(projectDir).autoExe(getPomPathByTreeSize("/root/sensor/out/projectSize.txt"), true);
+        }else if(args[0].equals("sup")){
+            new neu.lab.autoexec.sensor.AutoSemanticsSupImpl(projectDir).autoExe(getPomPathByTreeSize("/root/sensor/out/projectSize.txt"), true);
         }
     }
 

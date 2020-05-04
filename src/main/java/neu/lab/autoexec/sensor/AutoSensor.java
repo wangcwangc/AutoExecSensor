@@ -78,7 +78,7 @@ public abstract class AutoSensor {
             }
         }
         //多线程
-        ExecutorService executor = Executors.newFixedThreadPool(4);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         if (exeByOrder) {
             for (final String pomPath : leftProjects) {
