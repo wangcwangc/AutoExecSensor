@@ -19,7 +19,7 @@ import neu.lab.autoexec.util.PomReader;
 
 public abstract class AutoSensor {
     protected String name;
-    private static String Dir = "/root/sensor/";
+    private static String Dir = "/home/wwww/wangSensor/";
     public FileSyn donePjct;// project has done;
     public FileSyn mvnExpPjt;// project that throws exception when executes maven command
     public FileSyn notJarPjct;// record project that hasn't conflict
@@ -78,7 +78,7 @@ public abstract class AutoSensor {
             }
         }
         //多线程
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(8);
 
         if (exeByOrder) {
             for (final String pomPath : leftProjects) {

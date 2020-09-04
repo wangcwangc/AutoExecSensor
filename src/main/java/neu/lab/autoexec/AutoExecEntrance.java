@@ -9,12 +9,12 @@ import java.util.TreeMap;
 public class AutoExecEntrance {
 
     // TODO which directory
-    public static final String projectDir = "/root/sensor/unzip/";
+    public static final String projectDir = "/home/wwww/wangSensor/unzip/";
 
     // D:\ws\gitHub_old\
     public static void main(String[] args) throws IOException {
         //TODO which goal
-        if (args.length == 0) {
+        if (args[0].equals("printSize")) {
             new neu.lab.autoexec.sensor.AutoPrintSize(projectDir).autoExe(true);
         } else if (args[0].equals("detect")) {
             new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(getPomPathBySize("/root/sensor/out/projectSize.txt"), true);
@@ -23,11 +23,13 @@ public class AutoExecEntrance {
         } else if (args[0].equals("count")) {
             new neu.lab.autoexec.sensor.AutoCount(projectDir).autoExe(getPomPathBySize("/root/sensor/dataset/sortProject.txt"), true);
         } else if (args[0].equals("risk")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsRisk(projectDir).autoExe(getPomPathByTreeSize("/root/sensor/out/projectSize.txt"), true);
-        }else if(args[0].equals("classes")){
-            new neu.lab.autoexec.sensor.AutoSemanticsClassesDuplicate(projectDir).autoExe(getPomPathByTreeSize("/root/sensor/out/projectSize.txt"), true);
-        }else if(args[0].equals("sup")){
-            new neu.lab.autoexec.sensor.AutoSemanticsSupImpl(projectDir).autoExe(getPomPathByTreeSize("/root/sensor/out/projectSize.txt"), true);
+            new neu.lab.autoexec.sensor.AutoSemanticsRisk(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/Wxq/out/projectSize.txt"), true);
+        } else if (args[0].equals("classes")) {
+            new neu.lab.autoexec.sensor.AutoSemanticsClassesDuplicate(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/Wxq/out/projectSize.txt"), true);
+        } else if (args[0].equals("sup")) {
+            new neu.lab.autoexec.sensor.AutoSemanticsSupImpl(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/Wxq/out/projectSize.txt"), true);
+        } else if (args[0].equals("addDependency")) {
+            new neu.lab.autoexec.sensor.AutoAddDependency(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/sensor/out/projectSize.txt"), true);
         }
     }
 
@@ -81,7 +83,7 @@ public class AutoExecEntrance {
                             size2poms.put(size, poms);
                         }
                         poms.add(pom_jar_size[0]);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         line = reader.readLine();
                         continue;
