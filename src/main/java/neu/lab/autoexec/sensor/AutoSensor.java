@@ -50,7 +50,7 @@ public abstract class AutoSensor {
     }
 
     protected void readState() throws IOException {
-        donePjct = new FileSyn(getStateDir(), "Project_done.txt");
+        donePjct = new FileSyn(getStateDir(), name + "Project_done.txt");
         mvnExpPjt = new FileSyn(getStateDir(), "Project_throw_error.txt");
         notJarPjct = new FileSyn(getStateDir(), "Project_not_jar.txt");
         successPjt = new FileSyn(getStateDir(), "Project_build_success.txt");

@@ -8,6 +8,6 @@ public class AutoSemanticsSupImpl extends AutoSensor{
     @Override
     public String getCommand() {
         return //"mvn package -Dmaven.test.skip=true\n" +
-                "mvn -f=pom.xml -DresultPath=/home/wwww/Wxq/out/sup/ -DignoreTestScope=true -Dmaven.test.skip=true neu.lab:X:1.0:SemanticsConflictSupImpl -e";
+                "mvn -f=pom.xml -DuseAllJar=false -DresultPath=/home/wwww/wangSensor/out/sup/ -DignoreTestScope=true -Dmaven.test.skip=true neu.lab:X:1.0:SemanticsConflictSupImpl -e";
     }
 }

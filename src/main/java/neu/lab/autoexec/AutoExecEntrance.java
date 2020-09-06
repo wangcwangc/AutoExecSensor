@@ -23,11 +23,11 @@ public class AutoExecEntrance {
         } else if (args[0].equals("count")) {
             new neu.lab.autoexec.sensor.AutoCount(projectDir).autoExe(getPomPathBySize("/root/sensor/dataset/sortProject.txt"), true);
         } else if (args[0].equals("risk")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsRisk(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/Wxq/out/projectSize.txt"), true);
+            new neu.lab.autoexec.sensor.AutoSemanticsRisk(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
         } else if (args[0].equals("classes")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsClassesDuplicate(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/Wxq/out/projectSize.txt"), true);
+            new neu.lab.autoexec.sensor.AutoSemanticsClassesDuplicate(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
         } else if (args[0].equals("sup")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsSupImpl(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/Wxq/out/projectSize.txt"), true);
+            new neu.lab.autoexec.sensor.AutoSemanticsSupImpl(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
         } else if (args[0].equals("addDependency")) {
             new neu.lab.autoexec.sensor.AutoAddDependency(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/sensor/out/projectSize.txt"), true);
         }
