@@ -3,7 +3,7 @@ package neu.lab.autoexec.sensor;
 public class AutoCount extends AutoSensor {
 
     public AutoCount(String projectDir) {
-        super(projectDir,"count");
+        super(projectDir,"count",2);
     }
 
 

@@ -2,7 +2,7 @@ package neu.lab.autoexec.sensor;
 
 public class AutoSemanticsSupImpl extends AutoSensor{
     public AutoSemanticsSupImpl(String projectDir) {
-        super(projectDir, "semanticsSupImpl");
+        super(projectDir, "semanticsSupImpl",2);
     }
 
     @Override

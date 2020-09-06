@@ -27,6 +27,7 @@ public abstract class AutoSensor {
     public int allTask;
     public int completeSize;
     private String projectDir;
+    private int coreNum = 1;
 
     public String getBatPath() {
         return Dir + "decca.bat";
@@ -42,9 +43,10 @@ public abstract class AutoSensor {
 
     public abstract String getCommand();
 
-    public AutoSensor(String projectDir, String name) {
+    public AutoSensor(String projectDir, String name, int coreNum) {
         this.name = name;
         this.projectDir = projectDir;
+        this.coreNum = coreNum;
     }
 
     protected void readState() throws IOException {
@@ -78,7 +80,7 @@ public abstract class AutoSensor {
             }
         }
         //多线程
-        ExecutorService executor = Executors.newFixedThreadPool(8);
+        ExecutorService executor = Executors.newFixedThreadPool(coreNum);
 
         if (exeByOrder) {
             for (final String pomPath : leftProjects) {

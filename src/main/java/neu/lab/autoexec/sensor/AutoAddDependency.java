@@ -2,7 +2,7 @@ package neu.lab.autoexec.sensor;
 
 public class AutoAddDependency extends AutoSensor {
     public AutoAddDependency(String projectDir) {
-        super(projectDir, "addDependency");
+        super(projectDir, "addDependency",2);
     }
 
     @Override

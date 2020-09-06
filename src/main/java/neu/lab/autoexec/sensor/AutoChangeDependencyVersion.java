@@ -8,7 +8,7 @@ public class AutoChangeDependencyVersion extends AutoSensor {
 
     public AutoChangeDependencyVersion(String projectDir) {
 
-        super(projectDir, "change");
+        super(projectDir, "change",2);
     }
 
 

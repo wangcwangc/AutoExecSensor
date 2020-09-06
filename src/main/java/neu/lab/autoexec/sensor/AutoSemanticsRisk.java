@@ -2,7 +2,7 @@ package neu.lab.autoexec.sensor;
 
 public class AutoSemanticsRisk extends AutoSensor {
     public AutoSemanticsRisk(String projectDir) {
-        super(projectDir, "risk");
+        super(projectDir, "risk",2);
     }
 
     public String getCommand() {
