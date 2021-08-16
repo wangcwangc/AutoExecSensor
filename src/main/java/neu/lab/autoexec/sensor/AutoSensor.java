@@ -199,7 +199,7 @@ public abstract class AutoSensor {
 //        writeBat(pomPath);
         writeShell(pomPath);
 //        String line = "cmd.exe /C " + getBatPath();
-        String line = "sh " + getShellPath();
+        String line = "timeout 3600s sh " + getShellPath();
         System.out.println(line);
         CommandLine cmdLine = CommandLine.parse(line);
         DefaultExecutor executor = new DefaultExecutor();
