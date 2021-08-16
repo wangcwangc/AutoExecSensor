@@ -9,7 +9,7 @@ import java.util.TreeMap;
 public class AutoExecEntrance {
 
     // TODO which directory
-    public static final String projectDir = "/home/wwww/wangSensor/unzip/";
+    public static final String projectDir = "/home/wc/detect/unzip/";
 
     // D:\ws\gitHub_old\
     public static void main(String[] args) throws IOException {

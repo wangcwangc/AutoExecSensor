@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class ProcessResult {
     public static void main(String[] args) throws Exception {
-        File dir = new File("/Users/wangchao/Downloads/sensorbug/out/classes");
+        File dir = new File("/Users/wangchao/Downloads/sensorbug/out/sup");
         File[] files = dir.listFiles();
         for (File file : files) {
             if (file.isDirectory()) continue;

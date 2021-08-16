@@ -3,7 +3,7 @@ package neu.lab.autoexec.sensor;
 public class AutoSemanticsClassesDuplicate extends AutoSensor {
 
     public AutoSemanticsClassesDuplicate(String projectDir) {
-        super(projectDir, "classesDuplicate",2);
+        super(projectDir, "classesDuplicate",3);
     }
 
     @Override

@@ -190,8 +190,8 @@ public class ZipUtil {
 //            e.printStackTrace();
 //        }
 
-        String zipFilePath = "/home/wwww/wangSensor/githubProject";
-        String unzipFilePath = "/home/wwww/wangSensor/unzip";
+        String zipFilePath = "/home/wc/detect/zip";
+        String unzipFilePath = "/home/wc/detect/unzip";
 
         System.out.println(new File(zipFilePath).exists());
         System.out.println(new File(unzipFilePath).exists());
