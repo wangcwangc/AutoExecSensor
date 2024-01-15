@@ -19,7 +19,7 @@ import neu.lab.autoexec.util.PomReader;
 
 public abstract class AutoSensor {
     protected String name;
-    private static String Dir = "/home/wc/detect/";
+    private static String Dir = "/home/wc/project_result/empirical_study/";
     public FileSyn donePjct;// project has done;
     public FileSyn mvnExpPjt;// project that throws exception when executes maven command
     public FileSyn notJarPjct;// record project that hasn't conflict
@@ -270,7 +270,7 @@ public abstract class AutoSensor {
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(getShellPath())));
         printer.println("#!/bin/bash");
         printer.println("cd " + pomPath);
-        printer.println(getCommand().replace("-DresultPath=/home/wc/detect/", "-DresultPath=/home/wc/detect/outSize/" + Thread.currentThread().getName() + "/") + ">>" + Dir + "multithreadsensor/log/" + Thread.currentThread().getName() + name + "Log.txt");
+        printer.println(getCommand() + ">>" + Dir + "multithreadsensor/log/" + Thread.currentThread().getName() + name + "Log.txt");
         printer.close();
     }
 }

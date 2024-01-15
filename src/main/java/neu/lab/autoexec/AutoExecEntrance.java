@@ -9,28 +9,49 @@ import java.util.TreeMap;
 public class AutoExecEntrance {
 
     // TODO which directory
-    public static final String projectDir = "/home/wc/detect/unzip/";
+    public static final String projectDir = "/home/wc/hxf/empirical_study_github/";
 
     // D:\ws\gitHub_old\
     public static void main(String[] args) throws IOException {
-        //TODO which goal
-        if (args[0].equals("printSize")) {
-            new neu.lab.autoexec.sensor.AutoPrintSize(projectDir).autoExe(true);
-        } else if (args[0].equals("detect")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(getPomPathBySize("/root/sensor/out/projectSize.txt"), true);
-        } else if (args[0].equals("change")) {
-            new neu.lab.autoexec.sensor.AutoChangeDependencyVersion(projectDir).autoExe(getPomPathByTestSize("/root/sensor/dataset/sortTestFileResult.txt"), true);
-        } else if (args[0].equals("count")) {
-            new neu.lab.autoexec.sensor.AutoCount(projectDir).autoExe(getPomPathBySize("/root/sensor/dataset/sortProject.txt"), true);
-        } else if (args[0].equals("risk")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsRisk(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
-        } else if (args[0].equals("classes")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsClassesDuplicate(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
-        } else if (args[0].equals("sup")) {
-            new neu.lab.autoexec.sensor.AutoSemanticsSupImpl(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
-        } else if (args[0].equals("addDependency")) {
-            new neu.lab.autoexec.sensor.AutoAddDependency(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/sensor/out/projectSize.txt"), true);
+        String tree_size_file = "";
+        if (args.length == 2) {
+            tree_size_file = args[1];
         }
+        System.out.println(tree_size_file);
+        //TODO which goal
+        switch (args[0]) {
+            case "printSize":
+                new neu.lab.autoexec.sensor.AutoPrintSize(projectDir).autoExe(true);
+                break;
+            case "detect":
+                new neu.lab.autoexec.sensor.AutoSemanticsConflict(projectDir).autoExe(getPomPathBySize("/root/sensor/out/projectSize.txt"), true);
+                break;
+            case "change":
+                new neu.lab.autoexec.sensor.AutoChangeDependencyVersion(projectDir).autoExe(getPomPathByTestSize("/root/sensor/dataset/sortTestFileResult.txt"), true);
+                break;
+            case "count":
+                new neu.lab.autoexec.sensor.AutoCount(projectDir).autoExe(getPomPathBySize("/root/sensor/dataset/sortProject.txt"), true);
+                break;
+            case "risk":
+                new neu.lab.autoexec.sensor.AutoSemanticsRisk(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
+                break;
+            case "classes":
+                new neu.lab.autoexec.sensor.AutoSemanticsClassesDuplicate(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
+                break;
+            case "sup":
+                new neu.lab.autoexec.sensor.AutoSemanticsSupImpl(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/wangSensor/out/projectSize.txt"), true);
+                break;
+            case "addDependency":
+                new neu.lab.autoexec.sensor.AutoAddDependency(projectDir).autoExe(getPomPathByTreeSize("/home/wwww/sensor/out/projectSize.txt"), true);
+                break;
+            case "cveDetect":
+                new neu.lab.autoexec.sensor.AutoCVEDetect(projectDir).autoExe(getPomPathByTreeSize("/home/wc/detect/projectSize.txt"), true);
+                break;
+            case "decca_detect":
+                new neu.lab.autoexec.sensor.AutoDeccaDetect(projectDir).autoExe(getPomPathByTreeSize(tree_size_file), true);
+                break;
+        }
+
     }
 
     private static List<String> getPomPathBySize(String sizeFile) {
